@@ -1,0 +1,527 @@
+{
+	"info": {
+		"_postman_id": "f83dd19e-be63-4e18-b87b-00bbd28585c1",
+		"name": "Orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23450654"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200 - Login Suscess\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 500 - Internal Server Error\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(500);\r",
+							"    pm.expect(pm.response.text()).to.include(\"Internal server error\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 400 - Bad Request\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(400);\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad request\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 401 - Unauthorised\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(401);\r",
+							"    pm.expect(pm.response.text()).to.include(\"Unauthorised\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 404 - Not Found\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"    pm.expect(pm.response.text.toLowerCase()).to.include(\"Not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"testing\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/login",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Energy Types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData =pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Has Electric Data', function() {\r",
+							"    pm.expect(jsonData).to.have.property('electric');\r",
+							"})\r",
+							"\r",
+							"pm.test('Electric Energy Id of 3', function() {\r",
+							"    pm.expect(jsonData.electric.energy_id).to.equal(3);\r",
+							"})\r",
+							"\r",
+							"pm.test('Electric Has Kwh as Unit Type', function() {\r",
+							"    pm.expect(jsonData.electric.unit_type).to.equal('kWh');\r",
+							"})\r",
+							"\r",
+							"pm.test('Has Gas Data', function() {\r",
+							"    pm.expect(jsonData).to.have.property('gas');\r",
+							"})\r",
+							"\r",
+							"pm.test('Gas Energy Id of 1', function() {\r",
+							"    pm.expect(jsonData.gas.energy_id).to.equal(1);\r",
+							"})\r",
+							"\r",
+							"pm.test('Electric Has m³ as Unit Type', function() {\r",
+							"    pm.expect(jsonData.gas.unit_type).to.equal('m³');\r",
+							"})\r",
+							"\r",
+							"pm.test('Has Nuclear Data', function() {\r",
+							"    pm.expect(jsonData).to.have.property('nuclear');\r",
+							"})\r",
+							"\r",
+							"pm.test('Nuclear Energy Id of 2', function() {\r",
+							"    pm.expect(jsonData.nuclear.energy_id).to.equal(2);\r",
+							"})\r",
+							"\r",
+							"pm.test('Nuclear Has MW as Unit Type', function() {\r",
+							"    pm.expect(jsonData.nuclear.unit_type).to.equal('MW');\r",
+							"})\r",
+							"\r",
+							"pm.test('Has Oil Data', function() {\r",
+							"    pm.expect(jsonData).to.have.property('oil');\r",
+							"})\r",
+							"\r",
+							"pm.test('Oil Energy Id of 4', function() {\r",
+							"    pm.expect(jsonData.oil.energy_id).to.equal(4);\r",
+							"})\r",
+							"\r",
+							"pm.test('Oil Has Litres as Unit Type', function() {\r",
+							"    pm.expect(jsonData.oil.unit_type).to.equal('Litres');\r",
+							"})\r",
+							"\r",
+							"//Test 1\r",
+							"//Parameterise "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/energy",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"energy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Current Orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//Test 1\r",
+							"//Write code for Count of all existing orders"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/orders",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Gas Quantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 404 - Not Found\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"    pm.expect(pm.response.text()).to.include(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							"//Test 1\r",
+							"//Write code to verify calculation if returned in Response Body\r",
+							"\r",
+							"//Test 2\r",
+							"//All these buys could be automated in one"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/buy/1/3",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buy",
+						"1",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Nuclear Quantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.text()).to.include(\"no nuclear fuel\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"No Fuel to Purchase\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"no nuclear fuel\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//Test 1\r",
+							"//Write code to verify calculation if returned in Response Body"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/buy/2/3",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buy",
+						"2",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Elec Quantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 404 - Not Found\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"    pm.expect(pm.response.text()).to.include(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							"//Test 1\r",
+							"//Write code to verify calculation if returned in Response Body"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/buy/3/3",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buy",
+						"3",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Oil Quantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 404 - Not Found\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"    pm.expect(pm.response.text()).to.include(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							"//Test 1\r",
+							"//Write code to verify calculation if returned in Response Body"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/buy/4/3",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buy",
+						"4",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Invalid Energy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 404 - Not Found\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(400);\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad request\");\r",
+							"});\r",
+							"\r",
+							"//Test 1\r",
+							"//Parametrise {id} & {quantity} test where {id} is not 1-4"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/buy/5/3",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"buy",
+						"5",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify New Orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test 1\r",
+							"//Verify that response body contains only 2 entries for 'Feb'\r",
+							"\r",
+							"//Test 2\r",
+							"//Verify new orders using the Your order id from the reponse body in the Buy requests"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/orders",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Test Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200 - Login Suscess\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 400 - Bad Request\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(400);\r",
+							"    pm.expect(pm.response.text).to.include(\"Bad request\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 401 - Unauthorised\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(401);\r",
+							"    pm.expect(pm.response.text()).to.include(\"Unauthorised\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/reset",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"reset"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Current Orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//Test 1\r",
+							"//Write code for Count of all existing orders, and verify your orders no longer exist"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ensekapicandidatetest.azurewebsites.net/orders",
+					"protocol": "https",
+					"host": [
+						"ensekapicandidatetest",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
